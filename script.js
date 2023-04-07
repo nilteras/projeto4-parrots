@@ -11,8 +11,8 @@ const cartas = [
 ];
 let primeiraCarta;
 let segundaCarta;
-
-
+let contador = 0;
+let jogadas = 0;
 
 function quantasCartas(){
     qtdCartas = Number( prompt('Com quantas cartas quer jogar?') );
@@ -24,6 +24,7 @@ function quantasCartas(){
 quantasCartas();
 abrirBaralho();
 distribuirCartas();
+
 
 function comparador(){
     return Math.random() - 0.5;
@@ -44,12 +45,12 @@ function distribuirCartas(){
     const jogo = document.querySelector('.container');
     for(let i=0; i<baralho.length; i++){
         let carta = `
-        <li class="carta" onclick="clicar(this)">
-            <div  class="front-face face">
-                <img src="./Imagens/back.png" alt="">
+        <li class="carta" data-test="card" onclick="clicar(this)">
+            <div  class="front-face face" data-test="face-down-image">
+                <img data-test="face-down-image" src="./Imagens/back.png" alt="">
             </div>
             <div class="back-face face">
-                <img src="./Imagens/${baralho[i]}.gif">
+                <img data-test="face-up-image" src="./Imagens/${baralho[i]}.gif">
             </div> 
          </li>`;
          
@@ -69,26 +70,35 @@ function voltarCarta(){
 function clicar(carta){
     
     if(!carta.classList.contains('virar')){
-    if(primeiraCarta === undefined || segundaCarta === undefined){
+        if(primeiraCarta === undefined || segundaCarta === undefined){
 
-        carta.classList.add('virar');
+            carta.classList.add('virar');
+            contador++;
 
-        if(primeiraCarta === undefined){
-            primeiraCarta = carta;
-        }else{
-            if(segundaCarta === undefined){
-                segundaCarta = carta;
-            }
-            if(primeiraCarta.innerHTML === segundaCarta.innerHTML){
-                primeiraCarta = undefined;
-                segundaCarta = undefined;
+            if(primeiraCarta === undefined){
+                primeiraCarta = carta;
             }else{
-                setTimeout(voltarCarta, 1000);
+                if(segundaCarta === undefined){
+                    segundaCarta = carta;
+                }
+                if(primeiraCarta.innerHTML === segundaCarta.innerHTML){
+                    primeiraCarta = undefined;
+                    segundaCarta = undefined;
+                    jogadas += 2;
 
+                    fimJogo();
+                }else{
+                    setTimeout(voltarCarta, 1000);
+
+                }
             }
+        
         }
-       
     }
-}
 
+}
+function fimJogo(){
+    if(jogadas === baralho.length){
+        alert("Você ganhou em "+contador+" jogadas!");
+    }
 }
