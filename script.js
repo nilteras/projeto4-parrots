@@ -9,6 +9,8 @@ const cartas = [
     "tripletsparrot",
     "unicornparrot"
 ];
+let primeiraCarta;
+let segundaCarta;
 
 
 
@@ -23,12 +25,26 @@ quantasCartas();
 abrirBaralho();
 distribuirCartas();
 
+function comparador(){
+    return Math.random() - 0.5;
+}
+
+function abrirBaralho(){
+    
+    for(let i=0; i < qtdCartas/2; i++){
+        let carta = cartas[i];
+        baralho.push(carta);
+        baralho.push(carta);
+    }
+    
+     baralho.sort(comparador);
+     
+}
 function distribuirCartas(){
     const jogo = document.querySelector('.container');
-
     for(let i=0; i<baralho.length; i++){
         let carta = `
-        <li class="carta">
+        <li class="carta" onclick="clicar(this)">
             <div  class="front-face face">
                 <img src="./Imagens/back.png" alt="">
             </div>
@@ -43,28 +59,27 @@ function distribuirCartas(){
 
 }
 
-function comparador(){
-    return Math.random() - 0.5;
-}
-
-function abrirBaralho(){
+function clicar(carta){
     
-    for(let i=0; i < qtdCartas/2; i++){
-        let carta = cartas[i];
-        baralho.push(carta);
-        baralho.push(carta);
+    if(!carta.classList.contains('virar')){
+    if(primeiraCarta === undefined || segundaCarta === undefined){
+
+        carta.classList.add('virar');
+
+        if(primeiraCarta === undefined){
+            primeiraCarta = carta;
+        }else{
+            if(segundaCarta === undefined){
+                segundaCarta = carta;
+            }
+            if(primeiraCarta.innerHTML === segundaCarta.innerHTML){
+                console.log("igual");
+            }else{
+                console.log("diferente");
+            }
+        }
+       
     }
-    
-     baralho.sort(comparador);
-    
 }
-
-function clicar(front){
-    front = document.querySelector('.front-face');
-    console.log(front);
-    front.classlist.add('virar')
-    front.classlist.remove('face');
-    console.log(front);
-
 
 }
