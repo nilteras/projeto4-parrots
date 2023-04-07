@@ -59,6 +59,13 @@ function distribuirCartas(){
 
 }
 
+function voltarCarta(){
+    primeiraCarta.classList.remove('virar');
+    segundaCarta.classList.remove('virar');
+    primeiraCarta = undefined;
+    segundaCarta = undefined;
+}
+
 function clicar(carta){
     
     if(!carta.classList.contains('virar')){
@@ -73,9 +80,11 @@ function clicar(carta){
                 segundaCarta = carta;
             }
             if(primeiraCarta.innerHTML === segundaCarta.innerHTML){
-                console.log("igual");
+                primeiraCarta = undefined;
+                segundaCarta = undefined;
             }else{
-                console.log("diferente");
+                setTimeout(voltarCarta, 1000);
+
             }
         }
        
