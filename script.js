@@ -16,7 +16,7 @@ let jogadas = 0;
 let resultado;
 let contSegundos = 0;
 let idInterval;
-let oneSecond = 1000;
+const oneSecond = 1000;
 
 function tempo(){
     contSegundos++;
@@ -127,7 +127,7 @@ function fimJogo(){
       
     }
 }
-0
+
 function reiniciar(){
     if(resposta === 'sim'){
         window.location.reload();
