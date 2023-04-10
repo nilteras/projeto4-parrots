@@ -12,7 +12,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
+    position: relative
 
 }
 .titulo {
@@ -28,12 +29,33 @@ body {
 
     color: #75B79E;
 }
+.relogio {
+    width: 46px;
+    height: 47px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: -0.004em;
+
+    color: #86BD8D;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    margin-top: 8px;
+    margin-right: 8px;
+}
 .container {
     width: 100%;
 
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+
+    padding: 0 160px;
 
 }
 
@@ -66,7 +88,6 @@ img {
     backface-visibility: hidden;
     transition: all 0.5s;
     transform-style: preserve-3d;
-
 
 }
 .back-face {

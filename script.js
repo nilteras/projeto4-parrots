@@ -13,6 +13,15 @@ let primeiraCarta;
 let segundaCarta;
 let contador = 0;
 let jogadas = 0;
+let resultado;
+let contSegundos = 0;
+let idInterval;
+
+function tempo(){
+    contSegundos++;
+    const relogio = document.querySelector('.relogio');
+    relogio.innerHTML = contSegundos;
+}
 
 function quantasCartas(){
     qtdCartas = Number( prompt('Com quantas cartas quer jogar?') );
@@ -20,9 +29,12 @@ function quantasCartas(){
     while((qtdCartas < 4) || (qtdCartas > 14) || (qtdCartas%2 !== 0)){
         qtdCartas = Number( prompt('Com quantas cartas quer jogar?') );
     }
+    abrirBaralho();
+
+    idInterval = setInterval(tempo, 1000);
 }
 quantasCartas();
-abrirBaralho();
+
 distribuirCartas();
 
 
@@ -46,7 +58,7 @@ function distribuirCartas(){
     for(let i=0; i<baralho.length; i++){
         let carta = `
         <li class="carta" data-test="card" onclick="clicar(this)">
-            <div  class="front-face face" data-test="face-down-image">
+            <div  class="front-face face">
                 <img data-test="face-down-image" src="./Imagens/back.png" alt="">
             </div>
             <div class="back-face face">
@@ -99,6 +111,27 @@ function clicar(carta){
 }
 function fimJogo(){
     if(jogadas === baralho.length){
-        alert("Você ganhou em "+contador+" jogadas!");
+        alert("Você ganhou em "+contador+" jogadas! A duração do jogo foi de "+contSegundos+" segundos!");
+        clearInterval(idInterval);
+        resposta = prompt("Gostaria de reiniciar a partida?");
+        if (resposta === 'sim' || resposta === 'não'){
+            reiniciar();
+        }else{
+            resposta = prompt("Digite sim ou não: ");
+        } if(resposta === 'sim' || resposta === 'não'){
+            reiniciar();
+        }else{
+            resposta = prompt("Digite sim ou não: ");
+        }
+      
+    }
+}
+
+function reiniciar(){
+    console.log(resposta);
+    if(resposta === 'sim'){
+        window.location.reload();
+    }else if(resposta === 'não'){
+        alert("Obrigado por jogar!");
     }
 }
