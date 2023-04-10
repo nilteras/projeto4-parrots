@@ -16,6 +16,7 @@ let jogadas = 0;
 let resultado;
 let contSegundos = 0;
 let idInterval;
+let oneSecond = 1000;
 
 function tempo(){
     contSegundos++;
@@ -31,7 +32,7 @@ function quantasCartas(){
     }
     abrirBaralho();
 
-    idInterval = setInterval(tempo, 1000);
+    idInterval = setInterval(tempo, oneSecond);
 }
 quantasCartas();
 
@@ -100,7 +101,7 @@ function clicar(carta){
 
                     fimJogo();
                 }else{
-                    setTimeout(voltarCarta, 1000);
+                    setTimeout(voltarCarta, oneSecond);
 
                 }
             }
@@ -113,7 +114,7 @@ function fimJogo(){
     if(jogadas === baralho.length){
         alert("Você ganhou em "+contador+" jogadas! A duração do jogo foi de "+contSegundos+" segundos!");
         clearInterval(idInterval);
-        resposta = prompt("Gostaria de reiniciar a partida?");
+        resposta = prompt("Você gostaria de reiniciar a partida? (sim ou não)");
         if (resposta === 'sim' || resposta === 'não'){
             reiniciar();
         }else{
@@ -126,9 +127,8 @@ function fimJogo(){
       
     }
 }
-
+0
 function reiniciar(){
-    console.log(resposta);
     if(resposta === 'sim'){
         window.location.reload();
     }else if(resposta === 'não'){

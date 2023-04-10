@@ -16,7 +16,7 @@ body {
     position: relative
 
 }
-.titulo {
+.titulo{
     width: 540px;
     height: 63px;
  
@@ -99,4 +99,15 @@ img {
 }
 .virar .front-face {
     transform: rotateY(-180deg);
+}
+
+@media (max-width: 614px){
+    .img {
+        width: 100%;
+    }
+    .caixa-titulo {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 }
